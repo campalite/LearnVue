@@ -1,8 +1,8 @@
 import Vue from "vue";
 
-import ProductList from "./components/products/ProductList"
-import ProductSell from "./components/products/ProductSell"
-import ProductPurchase from "./components/products/ProductPurchase"
+import ProductList from "./components/products/ProductList";
+import ProductSell from "./components/products/ProductSell";
+import ProductPurchase from "./components/products/ProductPurchase";
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 

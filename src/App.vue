@@ -14,6 +14,9 @@ import Footer from "./components/shared/Footer.vue"
       components: {
         appHeader : Header,
         appFooter : Footer,
+      },
+      created(){
+        this.$store.dispatch("getTradeResult");
       }
     }
 </script>
