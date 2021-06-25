@@ -1,3 +1,6 @@
+ALERT!! I am not the real owner of this project, this is a clone project.
+
+
 # urun-islemleri
 
 > A Vue.js project

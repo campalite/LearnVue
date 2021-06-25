@@ -1,5 +1,11 @@
 <template>
     <div class="container">
+        <div class="loading" :style="isLoading">
+            <div class="lds-ripple">
+                <div></div>
+                <div></div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-6 offset-3 pt-3 card mt-5 shadow">
             <div class="card-body">
@@ -23,7 +29,7 @@
                               class="form-control"></textarea>
                 </div>
                 <hr>
-                <button class="btn btn-primary" @click="saveProduct">Kaydet</button>
+                <button class="btn btn-primary"  :disabled="saveEnabled" @click="saveProduct">Kaydet</button>
             </div>
         </div>
     </div>
@@ -38,13 +44,51 @@
                     count: null,
                     price: null,
                     description: ""
-                }
+                    
+                },
+                saveButtonClicked: false
             }
         },
         methods : {
             saveProduct(){
+                this.saveButtonClicked = true;
                 this.$store.dispatch("saveProduct", this.product)
             }
+        },
+        computed: {
+            saveEnabled(){
+                if(this.product.title.length>0 && this.product.count>0 && this.product.price >0 && this.product.description.length>0) {
+                    return false;
+                }else{
+                    return true;
+                }
+                
+                
+            },
+            isLoading(){
+                if(this.saveButtonClicked){
+                    return{
+                        display:"block"
+                    }
+                }else{
+                    return{
+                        display:"none"
+                    }
+                }
+            }
+        },
+        beforeRouteLeave (to, from, next) {
+            if((this.product.title.length>0 || this.product.count>0 || this.product.price >0 || this.product.description.length>0) && !this.saveButtonClicked){
+                if(confirm("Kaydedilmemis degisiklikler var . Çıkmak istiyor musunuz?")){
+                    next();
+                }else{
+                    next(false);
+                }
+            }else{
+                next();
+            }
+            
+            
         }
     }
 </script>
